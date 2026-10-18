@@ -1,34 +1,34 @@
 {
   "recipient": {
-    "name": "Đỗ Thị Anh Thư",
+    "name": "Anh Thư",
     "nickname": "Em",
     "age": 17
   },
   "sender": {
-    "name": "Tớ",
-    "signature": "— Tớ, người luôn đứng về phía cậu"
+    "name": "Anh",
+    "signature": "- Anh, người luôn đứng về phía Em"
   },
   "event": {
     "kicker": "Lá thư chúc mừng sinh nhật",
-    "title": "Gửi cậu của hôm nay",
+    "title": "Gửi Em của hôm nay",
     "date": "18 . 10",
     "place": "",
     "time": "18:00 tối nay"
   },
   "letter": {
     "heading": "Gửi Đỗ Thị Anh Thư,",
-    "body": "Hôm nay là ngày của cậu. Tớ đã định viết thật dài, nhưng rồi nhận ra có những điều chỉ cần nói gọn trong một câu. Cảm ơn cậu vì một năm qua đã luôn ở đó — dịu dàng, kiên nhẫn và ấm áp theo cách không ai thay thế được.",
-    "wish": "Điều ước duy nhất tớ gửi vào ngọn nến: mong tuổi mới của cậu luôn rạng rỡ như chính cậu của hôm nay — phần còn lại của thế giới, cứ để tụi tớ lo.",
-    "ps": "Tái bút: xoay nhìn quanh phòng nhé, tớ giấu vài món nhỏ xinh bên chiếc bánh kem."
+    "body": "Hôm nay là ngày của Em. Anh đã định viết thật dài, nhưng rồi nhận ra có những điều chỉ cần nói gọn trong một câu. Cảm ơn Em vì một năm qua đã luôn ở đó - dịu dàng, kiên nhẫn và ấm áp theo cách không ai thay thế được.",
+    "wish": "Điều ước duy nhất Anh gửi vào ngọn nến: mong tuổi mới của Em luôn rạng rỡ như chính Em của hôm nay - phần còn lại của thế giới, cứ để Anh lo.",
+    "ps": "Tái bút: xoay nhìn quanh phòng nhé, Anh giấu vài món nhỏ xinh bên chiếc bánh kem."
   },
   "banner": {
     "text": "TUỔI MỚI RỰC RỠ NHÉ!",
-    "sub": "thương cậu nhiều hơn hôm qua, ít hơn ngày mai"
+    "sub": "thương Em nhiều hơn hôm qua, ít hơn ngày mai"
   },
   "cake": {
     "candles": 5,
     "flavor": "kem dâu",
-    "topper": "HB"
+    "topper": "Anh Thu"
   },
   "memories": [
     {
@@ -55,19 +55,19 @@
   "gifts": [
     {
       "title": "Phiếu trà sữa",
-      "message": "Một chầu trà sữa không giới hạn — tớ mời, cậu uống, hết thì mình gọi thêm."
+      "message": "Một chầu trà sữa không giới hạn - Anh mời, Em uống, hết thì mình gọi thêm."
     },
     {
       "title": "Vé xem phim",
-      "message": "Một vé xem phim kèm bỏng ngô cỡ lớn, có giá trị vào bất kỳ ngày nào cậu muốn."
+      "message": "Một vé xem phim kèm bỏng ngô cỡ lớn, có giá trị vào bất kỳ ngày nào Em muốn."
     },
     {
       "title": "Cái ôm năm tuổi mới",
-      "message": "Một cái ôm thật chặt, dùng được bất cứ lúc nào trong năm — kể cả ngày trời mưa."
+      "message": "Một cái ôm thật chặt, dùng được bất cứ lúc nào trong năm - kể cả ngày trời mưa."
     }
   ],
   "hints": {
-    "approach": "Nhắm mắt, chắp tay — một điều ước đang thành hình...",
+    "approach": "Nhắm mắt, chắp tay - một điều ước đang thành hình...",
     "blowing": "Hít một hơi thật sâu... và thổi!",
     "blown": "Điều ước đã bay lên cùng làn khói",
     "relight": "Ánh lửa nhỏ trở lại, bữa tiệc tiếp tục"
@@ -80,7 +80,7 @@
     "pageTitle": "Chúc mừng sinh nhật {name}",
     "loading": "Đang chuẩn bị bánh kem...",
     "envelopeLabel": "Lá thư dành cho",
-    "envelopeFrom": "từ {sender} — mở ra đọc nhé",
+    "envelopeFrom": "từ {sender} - mở ra đọc nhé",
     "envelopeAddress": "Gửi: {name}",
     "envelopeAddressFrom": "từ: {sender}",
     "envelopeTap": "nhấn vào phong bì để mở",
@@ -104,11 +104,11 @@
     "relighting": "đang thắp nến...",
     "letterBadge": "phong thư đã mở",
     "letterTitle": "Lá thư dành cho {nickname}",
-    "letterSub": "nắn nót từng chữ, chỉ chờ {nickname} đọc — một lời chúc duy nhất nằm ngay trong đó",
+    "letterSub": "nắn nót từng chữ, chỉ chờ {nickname} đọc - một lời chúc duy nhất nằm ngay trong đó",
     "letterNote": "Đọc xong hãy trở về bữa tiệc và chạm bánh kem để **thổi nến** nhé.",
     "memoriesBadge": "năm qua của tụi mình",
     "memoriesTitle": "Ảnh kỷ niệm",
-    "memoriesSub": "mỗi tấm là một ngày vui — vuốt ngang để lật xem từng chút một",
+    "memoriesSub": "mỗi tấm là một ngày vui - vuốt ngang để lật xem từng chút một",
     "memoriesSwipe": "vuốt sang ngang để xem từng tấm",
     "memoriesDrag": "kéo chuột hoặc lăn con lăn để lướt xem ảnh",
     "memoriesPrev": "Ảnh trước",
@@ -116,18 +116,18 @@
     "memoriesGoto": "Xem ảnh số {n}",
     "giftsBadge": "bí mật nhỏ",
     "giftsTitle": "Một chút bất ngờ",
-    "giftsSub": "chọn một hộp bằng linh cảm — món quà bên trong là ngẫu nhiên, và chỉ mở được một lần duy nhất",
+    "giftsSub": "chọn một hộp bằng linh cảm - món quà bên trong là ngẫu nhiên, và chỉ mở được một lần duy nhất",
     "giftBox": "hộp số {n}",
     "giftOpening": "đang mở hộp...",
     "giftChosen": "định mệnh đã chọn",
-    "giftNote": "quà ngẫu nhiên, chỉ mở một lần — quà thật sẽ đến tay {nickname} sớm thôi",
+    "giftNote": "quà ngẫu nhiên, chỉ mở một lần - quà thật sẽ đến tay {nickname} sớm thôi",
     "footerMade": "làm với thật nhiều",
     "footerBy": "bởi {sender}",
     "footerNote": "Chạm bánh kem để thổi nến lại bất cứ lúc nào",
     "roomLetter": "Lá thư",
     "roomMemories": "Kỷ niệm",
     "roomGifts": "Quà bí mật",
-    "roomLetterSub": "một lời thương gửi cậu",
+    "roomLetterSub": "một lời thương gửi Em",
     "roomMemoriesSub": "{n} mảnh ký ức",
     "roomGiftsSub": "một chút bất ngờ",
     "roomOrbitHint": "Kéo để xoay · Cuộn hoặc chụm hai ngón để thu phóng",
