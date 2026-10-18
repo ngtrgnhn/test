@@ -1,0 +1,152 @@
+{
+  "recipient": {
+    "name": "Đỗ Thị Anh Thư",
+    "nickname": "Em",
+    "age": 17
+  },
+  "sender": {
+    "name": "Tớ",
+    "signature": "— Tớ, người luôn đứng về phía cậu"
+  },
+  "event": {
+    "kicker": "Lá thư chúc mừng sinh nhật",
+    "title": "Gửi cậu của hôm nay",
+    "date": "18 . 10",
+    "place": "",
+    "time": "18:00 tối nay"
+  },
+  "letter": {
+    "heading": "Gửi Đỗ Thị Anh Thư,",
+    "body": "Hôm nay là ngày của cậu. Tớ đã định viết thật dài, nhưng rồi nhận ra có những điều chỉ cần nói gọn trong một câu. Cảm ơn cậu vì một năm qua đã luôn ở đó — dịu dàng, kiên nhẫn và ấm áp theo cách không ai thay thế được.",
+    "wish": "Điều ước duy nhất tớ gửi vào ngọn nến: mong tuổi mới của cậu luôn rạng rỡ như chính cậu của hôm nay — phần còn lại của thế giới, cứ để tụi tớ lo.",
+    "ps": "Tái bút: xoay nhìn quanh phòng nhé, tớ giấu vài món nhỏ xinh bên chiếc bánh kem."
+  },
+  "banner": {
+    "text": "TUỔI MỚI RỰC RỠ NHÉ!",
+    "sub": "thương cậu nhiều hơn hôm qua, ít hơn ngày mai"
+  },
+  "cake": {
+    "candles": 5,
+    "flavor": "kem dâu",
+    "topper": "HB"
+  },
+  "memories": [
+    {
+      "src": "https://image.qwenlm.ai/generated-images/02b6a9fa-351a-4328-a3c9-d2d4fbed0265/_result.png",
+      "caption": "Chuyến xe đạp chiều hôm ấy"
+    },
+    {
+      "src": "https://image.qwenlm.ai/generated-images/0572e97c-358d-4190-a204-fdcd8700d6db/_result.png",
+      "caption": "Ngọn nến đầu tiên"
+    },
+    {
+      "src": "https://image.qwenlm.ai/generated-images/1b0ef83e-b1e1-4a32-acfd-321a80deb884/_result.png",
+      "caption": "Bữa picnic mùa xuân"
+    },
+    {
+      "src": "https://image.qwenlm.ai/generated-images/471a3b70-8ec9-444a-bde4-c408999e08f4/_result.png",
+      "caption": "Góc quán quen của tụi mình"
+    },
+    {
+      "src": "https://image.qwenlm.ai/generated-images/907e0e58-0ead-47d0-92b3-740f5c51f2ce/_result.png",
+      "caption": "Đêm pháo hoa rực rỡ"
+    }
+  ],
+  "gifts": [
+    {
+      "title": "Phiếu trà sữa",
+      "message": "Một chầu trà sữa không giới hạn — tớ mời, cậu uống, hết thì mình gọi thêm."
+    },
+    {
+      "title": "Vé xem phim",
+      "message": "Một vé xem phim kèm bỏng ngô cỡ lớn, có giá trị vào bất kỳ ngày nào cậu muốn."
+    },
+    {
+      "title": "Cái ôm năm tuổi mới",
+      "message": "Một cái ôm thật chặt, dùng được bất cứ lúc nào trong năm — kể cả ngày trời mưa."
+    }
+  ],
+  "hints": {
+    "approach": "Nhắm mắt, chắp tay — một điều ước đang thành hình...",
+    "blowing": "Hít một hơi thật sâu... và thổi!",
+    "blown": "Điều ước đã bay lên cùng làn khói",
+    "relight": "Ánh lửa nhỏ trở lại, bữa tiệc tiếp tục"
+  },
+  "scene": {
+    "garland": "HAPPY BIRTHDAY",
+    "quality": "auto"
+  },
+  "ui": {
+    "pageTitle": "Chúc mừng sinh nhật {name}",
+    "loading": "Đang chuẩn bị bánh kem...",
+    "envelopeLabel": "Lá thư dành cho",
+    "envelopeFrom": "từ {sender} — mở ra đọc nhé",
+    "envelopeAddress": "Gửi: {name}",
+    "envelopeAddressFrom": "từ: {sender}",
+    "envelopeTap": "nhấn vào phong bì để mở",
+    "letterFlying": "lá thư đang bay ra...",
+    "enterHint": "chạm vào trái tim ở góc thư để vào tiệc",
+    "enterAria": "Vào tiệc",
+    "hudGreeting": "Chúc mừng sinh nhật {name}",
+    "hudAge": "tròn {age} tuổi",
+    "scrollHint": "Cuộn xuống đọc thư",
+    "tapCake": "chạm vào chiếc bánh {flavor} để lại gần",
+    "steps": [
+      "lại gần",
+      "cầu nguyện",
+      "thổi nến",
+      "điều ước"
+    ],
+    "approaching": "cô bé đang tới...",
+    "tapToBlow": "nhấn vào bánh kem để thổi nến",
+    "blowingNow": "hít sâu... thổi!",
+    "tapToRelight": "nhấn vào bánh kem để thắp lại nến",
+    "relighting": "đang thắp nến...",
+    "letterBadge": "phong thư đã mở",
+    "letterTitle": "Lá thư dành cho {nickname}",
+    "letterSub": "nắn nót từng chữ, chỉ chờ {nickname} đọc — một lời chúc duy nhất nằm ngay trong đó",
+    "letterNote": "Đọc xong hãy trở về bữa tiệc và chạm bánh kem để **thổi nến** nhé.",
+    "memoriesBadge": "năm qua của tụi mình",
+    "memoriesTitle": "Ảnh kỷ niệm",
+    "memoriesSub": "mỗi tấm là một ngày vui — vuốt ngang để lật xem từng chút một",
+    "memoriesSwipe": "vuốt sang ngang để xem từng tấm",
+    "memoriesDrag": "kéo chuột hoặc lăn con lăn để lướt xem ảnh",
+    "memoriesPrev": "Ảnh trước",
+    "memoriesNext": "Ảnh sau",
+    "memoriesGoto": "Xem ảnh số {n}",
+    "giftsBadge": "bí mật nhỏ",
+    "giftsTitle": "Một chút bất ngờ",
+    "giftsSub": "chọn một hộp bằng linh cảm — món quà bên trong là ngẫu nhiên, và chỉ mở được một lần duy nhất",
+    "giftBox": "hộp số {n}",
+    "giftOpening": "đang mở hộp...",
+    "giftChosen": "định mệnh đã chọn",
+    "giftNote": "quà ngẫu nhiên, chỉ mở một lần — quà thật sẽ đến tay {nickname} sớm thôi",
+    "footerMade": "làm với thật nhiều",
+    "footerBy": "bởi {sender}",
+    "footerNote": "Chạm bánh kem để thổi nến lại bất cứ lúc nào",
+    "roomLetter": "Lá thư",
+    "roomMemories": "Kỷ niệm",
+    "roomGifts": "Quà bí mật",
+    "roomLetterSub": "một lời thương gửi cậu",
+    "roomMemoriesSub": "{n} mảnh ký ức",
+    "roomGiftsSub": "một chút bất ngờ",
+    "roomOrbitHint": "Kéo để xoay · Cuộn hoặc chụm hai ngón để thu phóng",
+    "roomClickHint": "Chạm bánh kem hoặc những món đồ lơ lửng để khám phá",
+    "roomClose": "Trở về bữa tiệc",
+    "roomUniverse": "MỘT VŨ TRỤ NHỎ DÀNH CHO",
+    "roomReset": "Về góc nhìn ban đầu",
+    "roomQuality": "Chất lượng đồ họa",
+    "roomQualityAuto": "Tự động",
+    "roomQualityHigh": "Chi tiết cao",
+    "roomQualityMedium": "Cân bằng",
+    "roomQualityLow": "Tiết kiệm",
+    "roomCandleAction": "Thổi nến",
+    "roomPanelBadge": "NHỮNG ĐIỀU NHỎ XINH",
+    "roomPanelLoading": "Đang mở món quà nhỏ…",
+    "roomImageUnavailable": "Ảnh này chưa tải được.",
+    "roomImageRetry": "Thử lại",
+    "roomGalleryHint": "Vuốt ngang hoặc dùng phím ← → để lật ảnh",
+    "roomEmptyMemories": "Những kỷ niệm mới đang chờ được viết.",
+    "roomNoWebGL": "Trình duyệt chưa mở được cảnh 3D. Bạn vẫn có thể đọc thư, xem ảnh và mở quà qua các nút bên dưới."
+  }
+}
