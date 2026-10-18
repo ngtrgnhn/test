@@ -31,10 +31,10 @@ export function RigLights() {
     const target = s.candlesLit ? 1 : 0.5;
     rig.level = THREE.MathUtils.damp(rig.level, target, 2.2, dt);
     const L = rig.level;
-    if (hemi.current) hemi.current.intensity = 1.55 * L;
-    if (key.current) key.current.intensity = 2.15 * L;
-    if (rim.current) rim.current.intensity = 0.85 * L;
-    if (fill.current) fill.current.intensity = 0.55 * L;
+    if (hemi.current) hemi.current.intensity = 0.80 * L;
+    if (key.current) key.current.intensity = 1.20 * L;
+    if (rim.current) rim.current.intensity = 0.45 * L;
+    if (fill.current) fill.current.intensity = 0.30 * L;
     const k = THREE.MathUtils.clamp((1 - L) / 0.5, 0, 1);
     tmp.copy(BRIGHT_BG).lerp(DIM_BG, k * 0.8);
     if (scene.background instanceof THREE.Color) scene.background.copy(tmp);
@@ -44,12 +44,12 @@ export function RigLights() {
   const sm = profile.shadowMap;
   return (
     <>
-      <hemisphereLight ref={hemi} args={["#fff2f7", "#f6a6c6", 1.55]} />
+      <hemisphereLight ref={hemi} args={["#fff2f7", "#f6a6c6", 0.80]} />
       <directionalLight
         key={`key-${profile.shadows}-${sm}`}
         ref={key}
         position={[4.6, 7.6, 5.2]}
-        intensity={2.15}
+        intensity={1.20}
         color="#fff0e0"
         castShadow={profile.shadows}
         shadow-mapSize={[sm, sm]}
@@ -62,8 +62,8 @@ export function RigLights() {
         shadow-bias={-0.0004}
         shadow-normalBias={0.03}
       />
-      <directionalLight ref={rim} position={[-6, 5, -5]} intensity={0.85} color="#ff8fc2" />
-      <directionalLight ref={fill} position={[-4.5, 2.4, 6.5]} intensity={0.55} color="#ffd9ec" />
+      <directionalLight ref={rim} position={[-6, 5, -5]} intensity={0.45} color="#ff8fc2" />
+      <directionalLight ref={fill} position={[-4.5, 2.4, 6.5]} intensity={0.30} color="#ffd9ec" />
     </>
   );
 }

@@ -344,7 +344,7 @@ export function Room() {
   const floorGlow = useRef<THREE.MeshBasicMaterial>(null);
 
   useFrame((state) => {
-    if (floorGlow.current) floorGlow.current.opacity = 0.2 + Math.sin(state.clock.elapsedTime * 1.3) * 0.02 + (1 - rig.level) * 0.22;
+    if (floorGlow.current) floorGlow.current.opacity = 0.075 + Math.sin(state.clock.elapsedTime * 1.3) * 0.008 + (1 - rig.level) * 0.10;
   });
 
   return (
@@ -377,7 +377,7 @@ export function Room() {
       {/* warm pool of candle light on the floor around the table */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.03, 0.2]} renderOrder={1} userData={{ noShadow: true }}>
         <circleGeometry args={[4.2, 48]} />
-        <meshBasicMaterial ref={floorGlow} map={glow} color="#ffb06a" transparent opacity={0.2} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
+        <meshBasicMaterial ref={floorGlow} map={glow} color="#ffb06a" transparent opacity={0.075} depthWrite={false} blending={THREE.AdditiveBlending} toneMapped={false} />
       </mesh>
 
       {/* out-of-focus lamps far behind: gives the room depth */}

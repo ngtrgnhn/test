@@ -10,7 +10,7 @@ try {
   await build({ entryPoints:['tests/regressions.ts'], outfile:file, bundle:true, platform:'node', format:'esm',
     jsx:'automatic', define:{ 'import.meta.env.DEV':'false' },
     banner:{ js:'globalThis.window = { location: { search: "" } };' },
-    external:['react','react/jsx-runtime','zustand'],
+    external:['react','react/jsx-runtime','react-dom/server','zustand'],
   });
   // External packages resolve relative to the bundle; supply a local runner path in the checkout.
   const local = resolve('.test-build.mjs');

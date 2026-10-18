@@ -144,7 +144,7 @@ export const DEFAULT_CONFIG: PartyConfig = {
     blown: "Điều ước đã bay lên cùng làn khói",
     relight: "Ánh lửa nhỏ trở lại, bữa tiệc tiếp tục",
   },
-  scene: { garland: "HAPPY BIRTHDAY", quality: "auto" },
+  scene: { garland: "HAPPY BIRTHDAY", quality: "high" },
   ui: {
     roomLetter: "Lá thư",
     roomMemories: "Kỷ niệm",
@@ -167,7 +167,7 @@ export const DEFAULT_CONFIG: PartyConfig = {
     roomPanelLoading: "Đang mở món quà nhỏ…",
     roomImageUnavailable: "Ảnh này chưa tải được.",
     roomImageRetry: "Thử lại",
-    roomGalleryHint: "Vuốt ngang hoặc dùng phím ← → để lật ảnh",
+    roomGalleryHint: "Vuốt hoặc dùng phím ← → để lật từng tấm ảnh",
     roomEmptyMemories: "Những kỷ niệm mới đang chờ được viết.",
     roomNoWebGL: "Trình duyệt chưa mở được cảnh 3D. Bạn vẫn có thể đọc thư, xem ảnh và mở quà qua các nút bên dưới.",
     envelopeLabel: "Lá thư dành cho",
@@ -264,9 +264,6 @@ export function normalizeConfig(raw: unknown): PartyConfig {
         .filter((g) => g.title || g.message)
     : D.gifts;
 
-  const q = str(sceneRaw.quality, D.scene.quality).toLowerCase();
-  const quality: QualityPref = q === "high" || q === "medium" || q === "low" ? q : "auto";
-
   const ui = strings(uiRaw, D.ui) as UiTexts;
   ui.steps =
     Array.isArray(uiRaw.steps) && uiRaw.steps.length > 0
@@ -291,7 +288,7 @@ export function normalizeConfig(raw: unknown): PartyConfig {
     memories,
     gifts,
     hints: strings(o.hints, D.hints),
-    scene: { garland: str(sceneRaw.garland, D.scene.garland), quality },
+    scene: { garland: str(sceneRaw.garland, D.scene.garland), quality: "high" },
     ui,
   };
 }

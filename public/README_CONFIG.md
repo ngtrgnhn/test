@@ -1,6 +1,6 @@
 # Cấu hình nội dung — `public/config.json`
 
-Bản v2 hiển thị thư, ảnh, quà trong không gian 3D quanh bánh. Không cuộn trang.
+Bản v2.1 hiển thị thư, ảnh, quà trong không gian 3D quanh bánh. Không cuộn trang.
 File config cũ vẫn dùng được: khóa mới bị thiếu tự nhận mặc định từ `src/config.ts`.
 
 ## Cập nhật
@@ -22,7 +22,7 @@ File config cũ vẫn dùng được: khóa mới bị thiếu tự nhận mặc
 | `letter` | `heading`, `body`, `wish`, `ps`; `ps` để rỗng được |
 | `banner` | `text`, `sub`; biểu ngữ khi thổi nến xong |
 | `cake` | `candles` (chuẩn hóa 1–12, thực tế mô hình 3–7), `flavor`, `topper` |
-| `scene` | `garland` (tối đa 26 ký tự), `quality` = `auto/high/medium/low` |
+| `scene` | `garland` (tối đa 26 ký tự), `quality` luôn được chuẩn hóa thành `high` |
 | `hints` | Chữ hướng dẫn theo `approach/blowing/blown/relight` |
 | `ui` | Nhãn giao diện và các khóa mới cho không gian 3D |
 
@@ -40,7 +40,8 @@ Các chuỗi `ui.*` hỗ trợ `{name}`, `{nickname}`, `{age}`, `{sender}`, `{da
 
 Chép ảnh nội bộ vào `public/photos/`. Đường dẫn tương đối hỗ trợ host ở thư mục con.
 Mảng rỗng ẩn vật thể ảnh và nút ảnh. Ảnh chỉ tải khi mở mục ảnh; khi lỗi có nút thử lại.
-Vuốt ngang, nhấn ‹ ›/chấm, hoặc dùng phím ← → để xem tất cả ảnh trong danh sách.
+Vuốt ngang, nhấn ‹ ›/chấm, hoặc dùng phím ← → để lật hai mặt từng tấm ảnh.
+Hai ảnh lân cận được tải trước sau khi mở để giảm thời gian chờ.
 
 ## Quà
 
@@ -67,7 +68,7 @@ không có máy chủ để ràng buộc người nhận. Mảng rỗng ẩn qu�
 | `roomUniverse` | Dòng nhỏ trên tên người nhận |
 | `roomOrbitHint`, `roomClickHint` | Cách xoay/thu phóng và chọn vật thể |
 | `roomReset`, `roomQuality` | Nút trả góc nhìn và nhãn chất lượng |
-| `roomQualityAuto/High/Medium/Low` | Tên các mức chất lượng |
+| `roomQualityHigh` | Nhãn chi tiết cao cố định; khóa Auto/Medium/Low cũ chỉ giữ tương thích |
 | `roomCandleAction` | Nút thổi nến cho bàn phím |
 | `roomClose`, `roomPanelBadge`, `roomPanelLoading` | Đóng, nhãn và trạng thái cửa sổ |
 | `roomImageUnavailable`, `roomImageRetry`, `roomGalleryHint` | Trạng thái và hướng dẫn xem ảnh |
@@ -80,7 +81,7 @@ vẫn điều khiển các phần tương ứng. Những khóa của trang cuộ
 
 ## Đồ họa và debug
 
-`scene.quality` mặc định `auto`, tự nhận thiết bị và hạ mức khi cần.
-URL `?q=high`, `?q=medium` hoặc `?q=low` ghim chất lượng và ưu tiên hơn cấu hình.
+`scene.quality` luôn là `high`, không hạ chi tiết theo tốc độ hoặc loại thiết bị.
+Các URL `?q=...` cũ không còn thay đổi chất lượng.
 Thêm `?debug` để xem thông báo config và `window.__party`, `window.__quality`,
-`window.__cakeXY()`. Có thể thử `__party.setState({ phase: 'party' })`.
+`window.__cakeXY()`, `window.__partyPerformance` (FPS/draw calls/triangles/DPR). Có thể thử `__party.setState({ phase: 'party' })`.

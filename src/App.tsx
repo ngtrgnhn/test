@@ -5,7 +5,7 @@ import { useLiveConfig } from './useLiveConfig';
 import { useParty } from './store';
 import { dom, DEBUG } from './dom';
 import { Experience } from './scene/Experience';
-import { Effects, PerfGuard, ShadowBudget } from './scene/Effects';
+import { Effects, ShadowBudget } from './scene/Effects';
 import { PROFILES, useQuality } from './scene/quality';
 import { gesture } from './scene/gesture';
 import { Envelope } from './ui/Envelope';
@@ -34,6 +34,7 @@ export default function App() {
   const { config, error } = useLiveConfig();
   const phase = useParty(s => s.phase);
   const panel = useParty(s => s.panel);
+  const panelStage = useParty(s => s.panelStage);
   const enteredAt = useParty(s => s.enteredAt);
   const douse = useParty(s => s.douse);
   const [root, setRoot] = useState<HTMLDivElement | null>(null);
@@ -62,12 +63,12 @@ export default function App() {
     onPointerMoveCapture={e => { gesture.setUi(!!uiTarget(e)); gesture.move(e.pointerId, e.clientX, e.clientY); }}
     onPointerUpCapture={e => gesture.up(e.pointerId)} onPointerCancelCapture={e => gesture.cancel(e.pointerId)}>
     {root && <SceneBoundary fallback={config ? makeT(config)('roomNoWebGL') : DEFAULT_CONFIG.ui.roomNoWebGL}><Canvas eventSource={root} eventPrefix="client"
-      frameloop={!visible || phase === 'loading' || phase === 'intro' || panel ? 'demand' : 'always'}
-      dpr={profile.dpr} shadows="soft" flat camera={{ fov: 42, position: [4.2, 3.4, 7], near: 0.1, far: 60 }}
-      gl={{ antialias: false, alpha: false, stencil: false, powerPreference: 'high-performance' }}
+      frameloop={!visible || phase === 'loading' || phase === 'intro' || (panel && panelStage !== 'zooming-in' && panelStage !== 'zooming-out') ? 'demand' : 'always'}
+      dpr={profile.dpr} shadows="soft" camera={{ fov: 42, position: [4.2, 3.4, 7], near: 0.1, far: 60 }}
+      gl={{ antialias: true, alpha: false, stencil: false, powerPreference: 'high-performance' }}
       onCreated={({ gl }) => { gl.setClearColor('#ffc9de'); gl.domElement.setAttribute('aria-label', 'Không gian sinh nhật 3D, kéo để xoay và chạm các vật thể để khám phá'); }}>
       {config && <Experience config={config} />}
-      <Effects /><PerfGuard /><ShadowBudget />
+      <Effects /><ShadowBudget />
     </Canvas></SceneBoundary>}
     <div className="room-vignette" />
     {config && <RoomHud config={config} />}

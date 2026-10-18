@@ -11,6 +11,8 @@ import { Pop } from './anim';
 import { roomIsInteractive } from './interaction';
 import { skyTexture, starTexture } from './textures';
 import { Twinkle } from './Twinkle';
+import { keepsakePosition } from './keepsakeLayout';
+import { StaticBatch } from './StaticBatch';
 
 const cardShape = new THREE.Shape();
 cardShape.moveTo(-0.44, 0.27); cardShape.lineTo(0, -0.07); cardShape.lineTo(0.44, 0.27); cardShape.closePath();
@@ -20,14 +22,22 @@ const giftGeometry = new RoundedBoxGeometry(0.62, 0.57, 0.6, 3, 0.035);
 const lidGeometry = new RoundedBoxGeometry(0.69, 0.12, 0.67, 3, 0.02);
 
 function labelTexture(title: string, sub: string) {
-  const c = document.createElement('canvas'); c.width = 512; c.height = 160;
-  const x = c.getContext('2d')!;
-  x.fillStyle = 'rgba(84,18,54,.94)'; x.beginPath(); x.roundRect(5, 4, 502, 150, 48); x.fill();
-  x.lineWidth = 3; x.strokeStyle = 'rgba(255,234,243,.7)'; x.stroke();
-  x.textAlign = 'center'; x.textBaseline = 'middle';
-  x.font = "800 46px 'Baloo 2', sans-serif"; x.fillStyle = '#fffaf2'; x.fillText(title, 256, 58);
-  x.font = "500 24px 'Be Vietnam Pro', sans-serif"; x.fillStyle = '#ffd3e5'; x.fillText(sub, 256, 111);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
+  const c=document.createElement('canvas'); c.width=1024; c.height=320;
+  const x=c.getContext('2d')!; x.scale(2,2);
+  const polygon=(points:number[][],color:string) => {
+    x.fillStyle=color; x.beginPath(); points.forEach(([px,py],i) => i ? x.lineTo(px,py) : x.moveTo(px,py)); x.closePath(); x.fill();
+  };
+  polygon([[6,34],[94,34],[94,155],[6,155],[33,94]],'#48132e');
+  polygon([[418,34],[506,34],[479,94],[506,155],[418,155]],'#48132e');
+  polygon([[50,130],[94,130],[94,155]],'#331025');
+  polygon([[418,130],[462,130],[418,155]],'#331025');
+  x.fillStyle='#6a2149'; x.fillRect(50,10,412,122);
+  x.strokeStyle='#f5ccde'; x.lineWidth=1.5; x.setLineDash([5,5]);
+  x.beginPath(); x.moveTo(59,20); x.lineTo(453,20); x.moveTo(59,122); x.lineTo(453,122); x.stroke(); x.setLineDash([]);
+  x.textAlign='center'; x.textBaseline='middle';
+  x.font="800 44px 'Baloo 2',sans-serif"; x.fillStyle='#fffaf2'; x.fillText(title,256,53,390);
+  x.font="500 22px 'Be Vietnam Pro',sans-serif"; x.fillStyle='#ffe1bc'; x.fillText(sub,256,101,390);
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.anisotropy=8;
   return t;
 }
 function EnvelopeModel() {
@@ -65,6 +75,7 @@ function GiftModel() {
 function Keepsake({ id, title, sub, position, delay, small }: { id: Panel; title: string; sub: string; position: [number,number,number]; delay: number; small: boolean }) {
   const group = useRef<THREE.Group>(null);
   const model = useRef<THREE.Group>(null);
+  const world = useMemo(() => new THREE.Vector3(), []);
   const [hovered, setHovered] = useState(false);
   const phase = useParty(s => s.phase);
   const panel = useParty(s => s.panel);
@@ -89,13 +100,14 @@ function Keepsake({ id, title, sub, position, delay, small }: { id: Panel; title
       model.current.rotation.z = reduce ? 0 : Math.sin(t * 0.8 + delay) * 0.045;
     }
   });
-  const active = phase === 'party' && !panel;
+  const active = phase === 'party';
   return <Pop delay={delay} dur={0.9} ease="elastic" origin={position} rise={-0.6}>
     <group ref={group} position={position} visible={active}
-      onClick={e => { if (roomIsInteractive()) { e.stopPropagation(); setCursor(''); useParty.getState().openPanel(id); } }}
+      onClick={e => { if (roomIsInteractive()) { e.stopPropagation(); setCursor(''); if(group.current) group.current.getWorldPosition(world);
+        useParty.getState().openPanel(id,[world.x,world.y,world.z]); } }}
       onPointerOver={over} onPointerOut={() => { setHovered(false); setCursor(''); }}>
       <group ref={model} scale={small ? .73 : 1}>
-        {id === 'letter' ? <EnvelopeModel /> : id === 'memories' ? <MemoryModel /> : <GiftModel />}
+        {id === 'letter' ? <EnvelopeModel /> : id === 'memories' ? <StaticBatch><MemoryModel /></StaticBatch> : <StaticBatch><GiftModel /></StaticBatch>}
         <sprite position={[0, -0.7, 0]} scale={[1.65, 0.515, 1]}><spriteMaterial map={tex} transparent depthWrite={false} toneMapped={false} /></sprite>
       </group>
     </group>
@@ -109,9 +121,9 @@ export function FloatingKeepsakes({ config }: { config: PartyConfig }) {
   const star = useMemo(() => starTexture(), []);
   const T = useMemo(() => makeT(config), [config]);
   return <group>
-    <Keepsake id="letter" title={T('roomLetter')} sub={T('roomLetterSub')} position={small ? [-1.8, 2.35, 1.65] : [-2.65, 2.45, 1.05]} delay={1.5} small={small} />
-    {config.memories.length > 0 && <Keepsake id="memories" title={T('roomMemories')} sub={T('roomMemoriesSub', { n: config.memories.length })} position={small ? [2.1, 2.75, 0.15] : [2.7, 2.75, -0.2]} delay={1.7} small={small} />}
-    {config.gifts.length > 0 && <Keepsake id="gifts" title={T('roomGifts')} sub={T('roomGiftsSub')} position={small ? [0.1, 3.35, -2] : [0.2, 2.9, -2.9]} delay={1.9} small={small} />}
+    <Keepsake id="letter" title={T('roomLetter')} sub={T('roomLetterSub')} position={keepsakePosition('letter',size.width/Math.max(size.height,1))} delay={1.5} small={small} />
+    {config.memories.length > 0 && <Keepsake id="memories" title={T('roomMemories')} sub={T('roomMemoriesSub', { n: config.memories.length })} position={keepsakePosition('memories',size.width/Math.max(size.height,1))} delay={1.7} small={small} />}
+    {config.gifts.length > 0 && <Keepsake id="gifts" title={T('roomGifts')} sub={T('roomGiftsSub')} position={keepsakePosition('gifts',size.width/Math.max(size.height,1))} delay={1.9} small={small} />}
     {phase === 'party' && <Twinkle count={profile.fancy ? 28 : 12} box={[0, 2.5, 0, 3, .9, 2.5]} texture={star} colors={['#fff0c8','#ffbee0']} intensity={1.8} size={[.035,.08]} drift={.12} />}
   </group>;
 }

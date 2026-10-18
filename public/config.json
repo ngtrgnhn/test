@@ -74,7 +74,7 @@
   },
   "scene": {
     "garland": "HAPPY BIRTHDAY",
-    "quality": "auto"
+    "quality": "high"
   },
   "ui": {
     "pageTitle": "Chúc mừng sinh nhật {name}",
@@ -145,7 +145,7 @@
     "roomPanelLoading": "Đang mở món quà nhỏ…",
     "roomImageUnavailable": "Ảnh này chưa tải được.",
     "roomImageRetry": "Thử lại",
-    "roomGalleryHint": "Vuốt ngang hoặc dùng phím ← → để lật ảnh",
+    "roomGalleryHint": "Vuốt hoặc dùng phím ← → để lật từng tấm ảnh",
     "roomEmptyMemories": "Những kỷ niệm mới đang chờ được viết.",
     "roomNoWebGL": "Trình duyệt chưa mở được cảnh 3D. Bạn vẫn có thể đọc thư, xem ảnh và mở quà qua các nút bên dưới."
   }

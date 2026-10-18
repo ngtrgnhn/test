@@ -1,4 +1,4 @@
-# hpbdtests — Tiệc sinh nhật 3D
+# hpbdtests v2.1 — Tiệc sinh nhật 3D
 
 Bản nâng cấp từ nhánh mặc định `3d-pink-eye-birthday-f254f` của
 [ngtrgnhn/happybirthday](https://github.com/ngtrgnhn/happybirthday), tại commit
@@ -9,11 +9,13 @@ Bản nâng cấp từ nhánh mặc định `3d-pink-eye-birthday-f254f` của
 Mở phong bì, đọc thư và chạm con dấu trái tim để bước vào căn phòng tiệc hồng.
 Không có trang cuộn: **thư, cụm ảnh và quà lơ lửng quanh bánh kem**.
 Kéo chuột hoặc vuốt để xoay phòng 360°; cuộn chuột / chụm hai ngón để thu phóng.
-Chạm vật thể để xem nội dung trong cửa sổ trên nền phòng 3D. Nút tắt bên dưới
+Chạm vật thể để camera tiến lại trong 1,1 giây rồi nội dung mở dần. Khi đóng,
+nội dung thu lại trước rồi camera trở về đúng vị trí, hướng nhìn và độ zoom cũ. Nút tắt bên dưới
 cũng mở được nội dung bằng bàn phím. Nút ↺ trả về góc nhìn đầu.
 
 - **Thư:** giấy viết tay, lời chúc và chữ ký lấy từ config.
-- **Ảnh:** vuốt, nút ‹ ›, các chấm hoặc phím ← →; ảnh chỉ tải khi mở mục ảnh.
+- **Ảnh:** lật hai mặt trong không gian bằng vuốt, nút ‹ ›, các chấm hoặc phím ← →.
+  Chỉ tải khi mở mục ảnh và tải trước hai ảnh lân cận; bấm liên tục vẫn giữ thứ tự lật.
 - **Quà:** chọn một trong tối đa ba hộp; phần thưởng ngẫu nhiên từ toàn bộ danh sách.
   Kết quả được giữ khi đóng/mở lại và lưu bằng localStorage cho cấu hình quà/người nhận đó.
   Đây là ghi nhớ trên trình duyệt, không phải kiểm soát danh tính ở máy chủ. Chặn lưu trữ
@@ -21,6 +23,8 @@ cũng mở được nội dung bằng bàn phím. Nút ↺ trả về góc nhìn
 - **Bánh kem:** nhấn để cô bé tới cầu nguyện, nhấn lần nữa để thổi, nhấn để thắp lại.
   Camera tự chuyển góc khi làm nghi thức rồi trở về góc người xem đã chọn.
   Kéo xoay hoặc chụm hai ngón không kích hoạt nhầm vật thể.
+- Phong bì ban đầu che kín giấy khi đóng; nắp và túi thư chồng mép để tránh khe hở.
+- Các nhãn hướng dẫn và nhãn vật thể là băng rôn đuôi én có nếp gấp và đường chỉ.
 - Cửa sổ nội dung hỗ trợ Escape, khóa focus và trả focus khi đóng. Nếu WebGL lỗi,
   thư/ảnh/quà vẫn đọc được qua thanh nút; nghi thức nến không được kích hoạt.
 
@@ -51,31 +55,37 @@ JSON hỏng khi đang mở giữ cấu hình cũ; lần tải đầu hỏng dùn
 
 - OrbitControls được giới hạn cao độ/zoom để tránh xuyên sàn và lật camera.
 - Các vật thể thư/ảnh/quà có mô hình riêng, chuyển động lơ lửng và nhãn vẽ lên texture.
-  Bánh có nhiều hoa kem hơn ở mức high; váy nhân vật có nếp gấp hình học.
-- Các cụm tĩnh được gộp theo vật liệu: thân hộp quà, cupcake, lọ hoa, bàn.
-  Đồ trong Pop vẫn giữ hoạt cảnh xuất hiện; các phần đang chuyển động không bị gộp.
+  Luôn bật toàn bộ hoa kem, nếp váy, hạt trang trí và hình học của mức high.
+- Các cụm tĩnh được gộp theo vật liệu: thân hộp quà, cupcake, lọ hoa, bàn và cụm ảnh
+  lơ lửng. Đồ trong Pop vẫn giữ hoạt cảnh xuất hiện; hình học không bị giảm số đỉnh.
 - 14 quả dâu và 14 đài lá dùng hai instanced mesh thay cho 28 mesh riêng.
-- Khung hình dừng khi mở nội dung hoặc ẩn tab; ảnh và mã cửa sổ được tải trễ.
-- Một bản đồ bóng ở 12 Hz khi xem phòng, 24 Hz khi làm nghi thức.
-  Ba mức high/medium/low giữ bóng mềm và bloom theo khả năng thiết bị;
-  hệ thống tự giảm chất lượng khi dưới ~27 fps, trừ khi đã ghim mức.
-- Giới hạn DPR high 1,75; low tối đa 1. Texture nền/gradient dùng lại từ cache.
-- Đã bỏ các thư viện và cảnh/trang cuộn không còn sử dụng.
+- Cảnh render với DPR tối đa 2 và MSAA 4 mẫu khi WebGL2 hỗ trợ. Bóng luôn 2048 px.
+  Không tự hạ chất lượng, kể cả cấu hình cũ hoặc URL còn `q=low/medium/auto`.
+- Chỉ cập nhật bóng ở 12 Hz khi xem phòng, 24 Hz khi làm nghi thức. Giới hạn
+  GPU trình bày khoảng 60 khung hình/giây để tránh render dư trên màn hình 90–144 Hz.
+  Mô hình, texture, số lượng hạt và độ phân giải cảnh giữ nguyên khi máy chậm.
+- HDR dùng ACES và chỉ đổi màu đầu ra một lần. Bloom tách ánh sáng có màu khỏi
+  vùng kem trắng; giảm nguồn sáng bánh, phản xạ studio và lớp sáng cộng giữa phòng.
+  Quầng sáng dùng bộ đệm lọc nhỏ hơn, giữ độ phân giải của cảnh chính.
+- Khung hình dừng khi nội dung đã mở hoặc ẩn tab; vẫn render khi camera đang zoom.
+  Ảnh và mã cửa sổ được tải trễ. Texture nền/gradient dùng lại từ cache.
 
-Chọn chất lượng ở góc phải; `?q=high|medium|low` ưu tiên hơn lựa chọn cấu hình.
-`prefers-reduced-motion` giảm chuyển động camera, hoạt cảnh xuất hiện và CSS.
-Không cam kết FPS: hiệu năng GPU cần đo trên điện thoại/trình duyệt đích.
+`prefers-reduced-motion` rút ngắn hiệu ứng camera/lật ảnh, giữ nguyên chi tiết.
+Thêm `?debug` và xem `window.__partyPerformance` để đọc FPS trình bày, draw calls,
+triangles, texture count và DPR. Đây là FPS trình duyệt, không phải GPU timer.
+Mục tiêu 60 fps phụ thuộc GPU, màn hình và nhiệt độ thiết bị; chưa đo trên điện thoại thực.
 
 ## Kiểm thử
 
-Tám regression tests trong `tests/regressions.ts` kiểm tra máy trạng thái nến,
-chặn hành động khi mở nội dung, trường hợp WebGL lỗi, phân biệt kéo/nhấn,
-lưu quà, chuẩn hóa config, gộp hình học/bảo toàn tọa độ và loại trừ mesh trong suốt/instanced.
+20 regression tests trong `tests/regressions.ts` kiểm tra nghi thức nến, chuyển
+trạng thái zoom/mở/đóng/khôi phục, hủy zoom sớm, WebGL lỗi, lật ảnh và thao tác liên tục,
+khóa chất lượng cao, nhịp trình bày 60 Hz, ngưỡng bloom, phong bì đóng, kéo/chạm,
+lưu quà, chuẩn hóa config và gộp hình học.
 
-TypeScript, tests và production build đã được chạy. Phiên làm việc này chưa có
-kiểm tra hình ảnh hoặc tương tác thực tế bằng trình duyệt; nên thử các bước
-mở thư → xoay cả hai chiều → mở từng vật thể → đóng bằng Escape → thổi/thắp nến
-trên cả desktop và điện thoại trước khi dùng chính thức.
+`npm run check` đã qua: TypeScript, 20 tests và production build.
+Chưa xác minh hình ảnh, biên dịch shader trên GPU hay tương tác bằng trình duyệt
+trong môi trường này. Nên thử trên thiết bị đích: mở thư → xoay cả hai chiều → mở
+thư/ảnh/quà → đóng bằng Escape → vuốt ảnh liên tục → thổi/thắp nến.
 
 ## Cấu trúc
 
@@ -86,6 +96,8 @@ trên cả desktop và điện thoại trước khi dùng chính thức.
 - `src/scene/gesture.ts`: phân biệt click, drag và pinch.
 - `src/scene/StaticBatch.tsx`: gộp các cụm hình học tĩnh.
 - `src/scene/`: phòng, bánh, nhân vật, bóng bay, ánh sáng và hạt.
-- `src/ui/RoomHud.tsx`: tiêu đề, nút tắt và chất lượng.
+- `src/ui/RoomHud.tsx`: tiêu đề, băng rôn, nút tắt và nhãn chi tiết cao.
 - `src/ui/RoomPanels.tsx`: thư, ảnh và quà trong dialog.
+- `src/ui/Gallery.tsx`, `photoFlip.ts`: ảnh hai mặt và hàng đợi lật ảnh.
+- `src/scene/renderBudget.ts`: nhịp trình bày và shader tách bloom.
 - `src/ui/giftReceipt.ts`: khóa và kiểm tra dữ liệu lưu quà.

@@ -38,11 +38,11 @@ function buildStudio(): THREE.Scene {
     m.lookAt(0, 0, 0);
     s.add(m);
   };
-  box(14, 9, [12, 16, 14], "#ffffff", 7); // key soft box (upper right, front)
-  box(3, 16, [-20, 6, -8], "#ffd0e6", 5); // tall rim strip, left-back
-  box(10, 3, [0, 22, -6], "#ffffff", 4); // overhead strip
-  box(5, 5, [-10, 4, 18], "#ffb36b", 3.2); // warm candle-ish spot, front-left
-  box(6, 6, [20, 3, -12], "#c6e8ff", 2.4); // cool window light, right-back
+  box(14, 9, [12, 16, 14], "#ffffff", 2.8); // key soft box (upper right, front)
+  box(3, 16, [-20, 6, -8], "#ffd0e6", 2.1); // tall rim strip, left-back
+  box(10, 3, [0, 22, -6], "#ffffff", 1.8); // overhead strip
+  box(5, 5, [-10, 4, 18], "#ffb36b", 1.4); // warm candle-ish spot, front-left
+  box(6, 6, [20, 3, -12], "#c6e8ff", 1.3); // cool window light, right-back
   return s;
 }
 

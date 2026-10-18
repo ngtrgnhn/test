@@ -6,6 +6,7 @@ import { useParty } from '../store';
 import { useQuality } from './quality';
 import { clamp01, easeOutCubic, sinceEntered } from './anim';
 import { overviewDistance } from './constants';
+import { keepsakePosition, PANEL_TIMING, smoothProgress } from './keepsakeLayout';
 
 const poses = {
   overview: { target: [0, 2.05, 0.1], radius: 3.1, width: 4.1, fov: 42, dir: [0.55, 0.3, 1] },
@@ -23,6 +24,9 @@ export function CameraRig() {
     placed: false, orbit: false, lastPhase: 'loading', reset: 0, holdUntil: 0,
     pos: new THREE.Vector3(), target: new THREE.Vector3(), dir: new THREE.Vector3(),
     savedPos: new THREE.Vector3(), savedTarget: new THREE.Vector3(), saved: false,
+    panelStage:'idle', tweenStart:0, startPos:new THREE.Vector3(), startTarget:new THREE.Vector3(),
+    focusPos:new THREE.Vector3(), focusTarget:new THREE.Vector3(), returnPos:new THREE.Vector3(), returnTarget:new THREE.Vector3(),
+    startFov:42, returnFov:42,
   });
 
   useEffect(() => {
@@ -65,8 +69,44 @@ export function CameraRig() {
     c.minDistance = overviewDistance(aspect) * 0.64;
     c.maxDistance = overviewDistance(aspect) * 1.45;
     c.enableDamping = !reduce;
-    // Dialogs pause the canvas; they must not alter the saved camera pose.
-    if (s.panel) return;
+    // Snapshot the exact orbit before focusing. Hold it until close has animated out.
+    if (s.panel && s.panelStage !== 'idle') {
+      if (a.panelStage !== s.panelStage) {
+        a.panelStage = s.panelStage;
+        a.tweenStart = now;
+        a.startPos.copy(camera.position); a.startTarget.copy(c.target); a.startFov = camera.fov;
+        if (s.panelStage === 'zooming-in') {
+          a.returnPos.copy(camera.position); a.returnTarget.copy(c.target); a.returnFov = camera.fov;
+          // Drain residual orbit damping so restoring the view cannot resume an old drag.
+          c.enableDamping = false; c.update();
+          camera.position.copy(a.returnPos); c.target.copy(a.returnTarget);
+          a.focusTarget.set(...(s.panelFocus ?? keepsakePosition(s.panel,aspect)));
+          a.dir.copy(camera.position).sub(a.focusTarget).normalize();
+          const fov = THREE.MathUtils.degToRad(36);
+          const h = 2*Math.atan(Math.tan(fov/2)*aspect);
+          const distance = Math.max(1.0/Math.tan(fov/2), .95/Math.tan(h/2));
+          a.focusPos.copy(a.dir).multiplyScalar(distance).add(a.focusTarget);
+        }
+      }
+      if(s.panelStage === 'zooming-in' || s.panelStage === 'zooming-out') {
+        const incoming = s.panelStage === 'zooming-in';
+        const t = (now-a.tweenStart)/(reduce ? PANEL_TIMING.reduced : PANEL_TIMING.zoom);
+        const k = smoothProgress(t);
+        camera.position.lerpVectors(a.startPos,incoming ? a.focusPos : a.returnPos,k);
+        c.target.lerpVectors(a.startTarget,incoming ? a.focusTarget : a.returnTarget,k);
+        camera.fov = THREE.MathUtils.lerp(a.startFov,incoming ? 36 : a.returnFov,k);
+        camera.updateProjectionMatrix(); camera.lookAt(c.target);
+        if(t >= 1) {
+          if(incoming) s.onPanelFocused();
+          else {
+            a.savedPos.copy(a.returnPos); a.savedTarget.copy(a.returnTarget); a.saved=true;
+            a.orbit=true; s.onPanelRestored();
+          }
+        }
+      }
+      return;
+    }
+    a.panelStage = 'idle';
     if (c.enabled) {
       c.update();
       a.savedPos.copy(camera.position);

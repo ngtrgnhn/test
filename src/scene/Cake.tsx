@@ -129,7 +129,7 @@ function Candle({
       g.rotation.x = lean * breath.dz + Math.sin(t * 7.3 + seed) * 0.05;
       if (halo.current) {
         const m = halo.current.material as THREE.SpriteMaterial;
-        const base = 0.55 + (1 - rig.level) * 0.5;
+        const base = 0.26 + (1 - rig.level) * 0.3;
         m.opacity = Math.min(1, ns) * base * (0.85 + Math.sin(t * 13 + seed) * 0.1);
         halo.current.scale.setScalar(0.42 + (1 - rig.level) * 0.25 + Math.sin(t * 9 + seed) * 0.02);
       }
@@ -396,7 +396,7 @@ function Topper({ age, text, grad }: { age: number; text: string; grad: THREE.Te
 function CakeRipple() {
   const meshes = useRef<(THREE.Mesh | null)[]>([]);
   const k = useRef(0);
-  const color = useMemo(() => new THREE.Color(2.4, 0.95, 1.7), []);
+  const color = useMemo(() => new THREE.Color(1.15, 0.4, 0.75), []);
   useFrame((state, rawDt) => {
     const dt = Math.min(rawDt, 0.05);
     const hover = useParty.getState().cakeHover ? 1 : 0;
@@ -409,7 +409,7 @@ function CakeRipple() {
       const s = 1 + ph * 0.5;
       m.scale.set(s, s, 1);
       const mat = m.material as THREE.MeshBasicMaterial;
-      mat.opacity = k.current * Math.pow(1 - ph, 1.6) * (0.55 + hover * 0.4);
+      mat.opacity = k.current * Math.pow(1 - ph, 1.6) * (0.22 + hover * 0.18);
       m.visible = k.current > 0.01;
     });
   });
@@ -455,7 +455,7 @@ export function Cake({ candleCount, age, topper }: { candleCount: number; age: n
     const t = state.clock.elapsedTime;
     const hover = useParty.getState().cakeHover;
     if (light.current) {
-      const target = candlesLit ? (hover ? 2.3 : 1.8) : 0;
+      const target = candlesLit ? (hover ? 0.85 : 0.65) : 0;
       light.current.intensity = THREE.MathUtils.damp(
         light.current.intensity,
         target * (1 + Math.sin(t * 13) * 0.08 + Math.sin(t * 29 + 2) * 0.05),
@@ -547,7 +547,7 @@ export function Cake({ candleCount, age, topper }: { candleCount: number; age: n
         ref={light}
         position={[0, FLAME_Y + 0.22, 0.1]}
         color="#ffb066"
-        intensity={1.8}
+        intensity={0.65}
         distance={7}
         decay={1.7}
       />

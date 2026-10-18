@@ -28,5 +28,5 @@
     "@types/three": "^0.160.0",
     "esbuild": "^0.25.12"
   },
-  "version": "2.0.0"
+  "version": "2.1.0"
 }

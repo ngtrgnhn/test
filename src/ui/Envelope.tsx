@@ -178,7 +178,7 @@ export function Envelope({ config }: { config: PartyConfig }) {
   const reading = stage === "reading";
 
   return (
-    <div className="fixed inset-0 z-40 overflow-hidden">
+    <div className="fixed inset-0 z-40 overflow-hidden" data-envelope-stage={stage}>
       {/* layered soft background */}
       <div className="absolute inset-0 bg-[linear-gradient(168deg,#ffc4dc_0%,#ff9ec6_40%,#f97fb4_100%)]" />
       <div className="absolute inset-0 bg-dots opacity-50" />
@@ -197,7 +197,7 @@ export function Envelope({ config }: { config: PartyConfig }) {
           className="anim-rise flex flex-col items-center gap-2 transition-opacity duration-500"
           style={{ animationDelay: "80ms", opacity: stage === "closed" ? 1 : 0 }}
         >
-          <div className="rounded-full bg-white/85 soft-shadow-sm px-5 py-2 -rotate-1">
+          <div className="ribbon-banner ribbon-banner--light soft-shadow-sm px-5 py-2 -rotate-1">
             <span className="font-display font-bold uppercase tracking-[0.14em] text-[13px] md:text-sm text-[#a8195c]">
               {config.event.kicker}
             </span>
@@ -264,7 +264,8 @@ export function Envelope({ config }: { config: PartyConfig }) {
                   className={`absolute left-[6%] right-[6%] bottom-[8%] transition-all duration-700 ease-[cubic-bezier(.22,1,.36,1)] ${
                     letterOut ? "-translate-y-[52%]" : "translate-y-[3%]"
                   }`}
-                  style={{ zIndex: 35 }}
+                  data-peek-letter
+                  style={{ zIndex: 35, visibility: stage === "closed" || stage === "flap" ? "hidden" : "visible" }}
                 >
                   <div className="rounded-[20px] bg-[linear-gradient(180deg,#fffafc,#fff0f6)] border border-white soft-shadow-sm px-6 py-5">
                     <p className="font-body text-[13px] uppercase tracking-[0.16em] text-ink-soft font-semibold">
@@ -283,12 +284,12 @@ export function Envelope({ config }: { config: PartyConfig }) {
                 <div
                   className="absolute inset-0 rounded-[26px] bg-[linear-gradient(180deg,#ffb0cf,#ff97bf)]"
                   style={{
-                    clipPath: "polygon(0 26%, 50% 64%, 100% 26%, 100% 100%, 0 100%)",
+                    clipPath: "polygon(0 0, 50% 56.5%, 100% 0, 100% 100%, 0 100%)",
                     zIndex: 40,
                   }}
                 >
                   <div className="absolute inset-0 bg-stripes opacity-60" />
-                  <div className="absolute inset-x-0 top-[36%] flex flex-col items-center gap-0.5">
+                  <div className="absolute inset-x-0 top-[64%] flex flex-col items-center gap-0.5">
                     <span className="paper-hand !text-[20px] !leading-tight text-[#7c2a50]">
                       {T("envelopeAddress")}
                     </span>
@@ -390,13 +391,13 @@ export function Envelope({ config }: { config: PartyConfig }) {
         {stage === "closed" && (
           <div className="anim-rise flex flex-col items-center gap-2" style={{ animationDelay: "200ms" }}>
             <HeartIcon className="w-8 h-8 text-white anim-heart" />
-            <p className="hud-chip hud-chip--soft rounded-full px-4 py-2 text-center text-[15px] font-semibold md:text-base">
+            <p className="hud-chip hud-chip--soft ribbon-banner rounded-full px-4 py-2 text-center text-[15px] font-semibold md:text-base">
               {T("envelopeTap")}
             </p>
           </div>
         )}
         {(stage === "flap" || stage === "fly" || stage === "dissolve") && (
-          <p className="hud-chip hud-chip--soft anim-bob rounded-full px-4 py-2 text-center text-[15px] font-semibold md:text-base">
+          <p className="hud-chip hud-chip--soft ribbon-banner anim-bob rounded-full px-4 py-2 text-center text-[15px] font-semibold md:text-base">
             {T("letterFlying")}
           </p>
         )}
@@ -408,7 +409,7 @@ export function Envelope({ config }: { config: PartyConfig }) {
           className="pointer-events-none fixed inset-x-0 bottom-[max(18px,env(safe-area-inset-bottom))] z-30 flex justify-center px-6 anim-rise transition-opacity duration-300"
           style={{ animationDelay: "350ms", opacity: wipe ? 0 : 1 }}
         >
-          <p className="hud-chip hud-chip--soft rounded-full px-4 py-2 text-center text-[15px] font-semibold md:text-base">
+          <p className="hud-chip hud-chip--soft ribbon-banner rounded-full px-4 py-2 text-center text-[15px] font-semibold md:text-base">
             <HeartIcon className="anim-heart h-4 w-4 shrink-0 text-butter" />
             {T("enterHint")}
           </p>
